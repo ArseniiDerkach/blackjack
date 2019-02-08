@@ -29,6 +29,7 @@ function Deck() {
             newOrder.push(card);
         }
         [...cardOrder] = newOrder;
+        console.log(cardOrder);
     }
 }
 
@@ -39,7 +40,7 @@ function Table() {
     this.playerCards = [];
     this.dealerCards = [];
     this.init = () => {
-        deck.shuffle();
+        // deck.shuffle();
         const wrapper = document.getElementsByClassName('wrapper')[0];
         const dealerCards = document.createElement('div');
         dealerCards.classList.add('dealer-cards');
@@ -66,6 +67,7 @@ function Table() {
         playerCards.innerHTML = `${this.playerCards.map(card => card)} (${this.playerScore()})`;
     }
     this.deal = () => {
+        deck.shuffle();
         this.playerCards = [];
         this.dealerCards = [];
         this.playerCards.push(deck.takeCard());
@@ -79,6 +81,7 @@ function Table() {
         document.getElementsByClassName('game-result')[0].innerHTML = '';
     }
     const count = (cards) => {
+        debugger;
         let currentCount = 0;
         let acesCount = 0;
         for (let i = 0; i < cards.length; i++) {
@@ -98,7 +101,7 @@ function Table() {
             if (currentCount > 21) {
                 currentCount-=10;
                 acesCount--;
-            }
+            } else break;
         }
         return currentCount;
     }
